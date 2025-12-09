@@ -3,10 +3,10 @@ __pycache__/
 *.pyo
 *.pyd
 *.log
+outputs/videos/
+outputs/srt/
 .venv/
 env/
 .git/
 .gitignore
-outputs/videos/
-outputs/srt/
 frontend/node_modules/
