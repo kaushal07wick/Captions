@@ -5,3 +5,4 @@ pysrt
 yt-dlp
 ffmpeg-python
 pydub
+openai
