@@ -1,0 +1,152 @@
+1
+00:00:00,000 --> 00:00:06,000
+Make a Mario style side scroller, but with an Indian auntie as the protagonist.
+
+2
+00:00:06,000 --> 00:00:10,960
+In an Indian building and her main attack is to throw chappals.
+
+3
+00:00:10,960 --> 00:00:11,600
+Chappals.
+
+4
+00:00:11,600 --> 00:00:13,440
+Use sprites from the internet.
+
+5
+00:00:16,880 --> 00:00:18,560
+So okay, we've got the output.
+
+6
+00:00:18,560 --> 00:00:19,360
+Auntie's revenge.
+
+7
+00:00:19,360 --> 00:00:21,520
+These bratty kids are making noise in the corridor.
+
+8
+00:00:21,520 --> 00:00:23,120
+Use arrow keys to jump and move.
+
+9
+00:00:23,120 --> 00:00:24,480
+Press Z to throw chappals.
+
+10
+00:00:24,480 --> 00:00:25,360
+There's no output.
+
+11
+00:00:25,360 --> 00:00:26,720
+Dude, there is no output.
+
+12
+00:00:26,720 --> 00:00:28,880
+Where is the auntie or the building?
+
+13
+00:00:28,880 --> 00:00:29,840
+Where is the output?
+
+14
+00:00:29,840 --> 00:00:30,560
+There's no output.
+
+15
+00:00:30,560 --> 00:00:31,680
+I talk to Gemini like this.
+
+16
+00:00:31,680 --> 00:00:32,880
+I'm just like, dude, there's no output.
+
+17
+00:00:32,880 --> 00:00:34,000
+I literally type the word dude.
+
+18
+00:00:34,000 --> 00:00:34,800
+Dude, there's no output.
+
+19
+00:00:34,800 --> 00:00:35,920
+Where is the auntie or the building?
+
+20
+00:00:35,920 --> 00:00:36,960
+So we now have the auntie.
+
+21
+00:00:36,960 --> 00:00:38,000
+She looks angry.
+
+22
+00:00:38,000 --> 00:00:39,440
+There's an emoji on her head actually.
+
+23
+00:00:39,440 --> 00:00:41,120
+It's created a nice little sigh for me.
+
+24
+00:00:41,120 --> 00:00:43,360
+I'm just gonna throw chappals at these stupid kids.
+
+25
+00:00:43,360 --> 00:00:45,280
+How dare they sit in my building?
+
+26
+00:00:45,280 --> 00:00:46,879
+Simply sitting and scrolling.
+
+27
+00:00:46,879 --> 00:00:48,640
+Not even subscribing to Varun Maya.
+
+28
+00:00:48,640 --> 00:00:50,240
+Nobody would really play a game like this.
+
+29
+00:00:50,240 --> 00:00:52,080
+I think these are very, very simple, small things.
+
+30
+00:00:52,080 --> 00:00:53,920
+But I think it's useful for marketing.
+
+31
+00:00:53,920 --> 00:00:56,560
+Like if you're a brand and you have a cool idea around marketing,
+
+32
+00:00:56,560 --> 00:00:58,480
+something, some product that you're launching,
+
+33
+00:00:58,480 --> 00:01:00,160
+you should be making simple games like this.
+
+34
+00:01:00,160 --> 00:01:02,080
+We are now entering that world where we used to have
+
+35
+00:01:02,080 --> 00:01:03,760
+mini-clip games many, many years ago.
+
+36
+00:01:03,760 --> 00:01:06,399
+You can now do that as a brand for a marketing launch,
+
+37
+00:01:06,399 --> 00:01:07,440
+which I think is pretty cool.
+
+38
+00:01:07,440 --> 00:01:08,640
+You should take advantage of it.
+
