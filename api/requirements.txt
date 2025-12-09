@@ -2,8 +2,6 @@ fastapi
 uvicorn[standard]
 python-multipart
 pysrt
-openai-whisper
 opencv-python
 yt-dlp
 ffmpeg-python
-imageio[ffmpeg]
