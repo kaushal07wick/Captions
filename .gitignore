@@ -1,3 +1,27 @@
 .aeos/
 /downloads
 /captioned.mp4
+/outputs
+/api/_pycache
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Output and temporary files
+outputs/
+api/outputs/
+*.mp4
+*.srt
+*.log
+*.tmp
+
+# System files
+.DS_Store
+Thumbs.db

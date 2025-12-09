@@ -1,0 +1,20 @@
+[build]
+builder = "Docker"
+
+[deploy]
+# The command Railway runs after building
+startCommand = "python api/main.py"
+
+# Railway automatically injects $PORT, but we set a fallback
+envs = { PORT = "8000" }
+
+# Optional: health check to ensure the service is ready
+healthcheckPath = "/"
+healthcheckTimeout = 120
+
+# Number of concurrent deploys allowed
+numReplicas = 1
+
+# Auto-deploy on git push
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3
