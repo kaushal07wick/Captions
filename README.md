@@ -83,27 +83,6 @@ http://127.0.0.1:8000
 
 ---
 
-## ☁️ Railway Deployment
-
-```bash
-railway up
-```
-
-or manually:
-
-```bash
-railway run uvicorn api.index:app --host 0.0.0.0 --port $PORT
-```
-
-Ensure your `railway.toml` includes:
-
-```toml
-[deploy]
-startCommand = "uvicorn api.index:app --host 0.0.0.0 --port $PORT"
-```
-
----
-
 ## ⚖️ License
 
 This project is licensed under the **[MIT License](./LICENSE)**.
