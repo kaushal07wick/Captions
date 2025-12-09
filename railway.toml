@@ -1,20 +1,18 @@
 [build]
-builder = "Docker"
+builder = "Dockerfile"
 
 [deploy]
-# The command Railway runs after building
-startCommand = "python api/main.py"
+# Run the FastAPI server via Uvicorn (matches your Dockerfile)
+startCommand = "uvicorn api.index:app --host 0.0.0.0 --port $PORT"
 
-# Railway automatically injects $PORT, but we set a fallback
+# Railway auto-injects $PORT, fallback for local builds
 envs = { PORT = "8000" }
 
-# Optional: health check to ensure the service is ready
+# Health check endpoint
 healthcheckPath = "/"
 healthcheckTimeout = 120
 
-# Number of concurrent deploys allowed
+# Deployment control
 numReplicas = 1
-
-# Auto-deploy on git push
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 3
