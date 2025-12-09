@@ -1,5 +1,10 @@
 #!/bin/sh
-# 🚀 Start script for Railway (FastAPI)
+set -e
 
-echo "Starting CaptionGen FastAPI server..."
-uvicorn api.index:app --host 0.0.0.0 --port ${PORT:-8000}
+echo "🚀 Starting CaptionGen FastAPI server..."
+
+# Change to correct directory
+cd /app/api
+
+# Start FastAPI via Uvicorn
+uvicorn index:app --host 0.0.0.0 --port ${PORT:-8000}
