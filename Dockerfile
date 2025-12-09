@@ -1,23 +1,22 @@
-# ===========================
-# STAGE 1: Base
-# ===========================
-FROM python:3.10-alpine AS base
+FROM python:3.10-slim
 
 WORKDIR /app
 
-# Install ffmpeg and system dependencies
-RUN apk add --no-cache ffmpeg bash
+# System dependencies for ffmpeg, OpenCV, yt-dlp
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ffmpeg \
+    libsm6 \
+    libxext6 \
+    libgl1 \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy and install only requirements first for cache efficiency
 COPY api/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy app code
-COPY api/ ./api/
-COPY frontend/ ./frontend/
+COPY . .
 
-# Expose FastAPI port
+ENV PORT=8000
 EXPOSE 8000
 
-# Run FastAPI app
 CMD ["python", "-m", "api.main"]
