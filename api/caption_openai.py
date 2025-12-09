@@ -15,12 +15,20 @@ from openai import OpenAI
 from caption_position import detect_face_position
 from dotenv import load_dotenv
 import os
+import os
+from dotenv import load_dotenv
 
-# === Load environment ===
-load_dotenv()
+# Load .env if it exists, but don't require it
+load_dotenv(override=False)
+
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
 if not OPENAI_API_KEY:
-    raise RuntimeError("OPENAI_API_KEY not found in environment (.env)")
+    print("⚠️ OPENAI_API_KEY not found in .env — checking system environment...")
+    OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+
+if not OPENAI_API_KEY:
+    raise RuntimeError("❌ OPENAI_API_KEY not found in environment or .env")
 
 # === Paths ===
 BASE_DIR = Path(__file__).resolve().parent.parent
