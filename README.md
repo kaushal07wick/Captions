@@ -43,7 +43,7 @@ pip install -r requirements.txt
 
 ```bash
 cd api
-uvicorn index:app --host 0.0.0.0 --port 8000 --reload
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 Then open your browser at:

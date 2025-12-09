@@ -7,4 +7,4 @@ echo "🚀 Starting CaptionGen FastAPI server..."
 cd /app/api
 
 # Start FastAPI via Uvicorn
-uvicorn index:app --host 0.0.0.0 --port ${PORT:-8000}
+uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}
