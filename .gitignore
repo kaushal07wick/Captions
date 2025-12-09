@@ -3,6 +3,7 @@
 /captioned.mp4
 /outputs
 /api/_pycache
+.env
 
 # Python cache
 __pycache__/

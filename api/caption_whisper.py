@@ -30,7 +30,7 @@ def clean_title(title: str) -> str:
 
 
 #  Caption Generation
-def generate_captions(audio_path: str, model_size: str = "tiny"):
+def generate_captions(audio_path: str, model_size: str = "small"):
     """Generate timestamped captions from audio using Whisper."""
     model = whisper.load_model(model_size)
     result = model.transcribe(audio_path)

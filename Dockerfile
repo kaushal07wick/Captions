@@ -1,25 +1,23 @@
-# ---- Base image ----
-FROM python:3.10-slim
+# ===========================
+# STAGE 1: Base
+# ===========================
+FROM python:3.10-alpine AS base
 
-# ---- System deps ----
-RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg && rm -rf /var/lib/apt/lists/*
-
-# ---- Working dir ----
 WORKDIR /app
 
-# ---- Install dependencies ----
-COPY api/requirements.txt ./requirements.txt
+# Install ffmpeg and system dependencies
+RUN apk add --no-cache ffmpeg bash
+
+# Copy and install only requirements first for cache efficiency
+COPY api/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# ---- Copy project ----
-COPY . .
+# Copy app code
+COPY api/ ./api/
+COPY frontend/ ./frontend/
 
-# ---- Environment ----
-ENV PORT=8000
-ENV PYTHONUNBUFFERED=1
-
-# ---- Expose port ----
+# Expose FastAPI port
 EXPOSE 8000
 
-# ---- Start command ----
-CMD ["./start.sh"]
+# Run FastAPI app
+CMD ["python", "-m", "api.main"]
