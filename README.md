@@ -3,6 +3,7 @@
 **AI-powered, auto-synced captions for YouTube Shorts.**
 Removes the manual captioning pain — built on **FastAPI + Whisper + FFmpeg** for real-time caption generation.
 
+![image](./ui.png)
 ---
 
 ## ⚙️ Features

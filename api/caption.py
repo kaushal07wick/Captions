@@ -76,7 +76,7 @@ def generate_captions(audio_path: str, model_size: str = "tiny"):
     return micro_segments
 
 # Save Captions
- def save_srt(segments, srt_path: Path):
+def save_srt(segments, srt_path: Path):
     """Save caption segments as an SRT file."""
     subs = pysrt.SubRipFile()
     for i, seg in enumerate(segments, start=1):
@@ -91,8 +91,9 @@ def generate_captions(audio_path: str, model_size: str = "tiny"):
     srt_path.parent.mkdir(parents=True, exist_ok=True)
     subs.save(srt_path, encoding="utf-8")
 
+
 # Burn Captions into Video 
- def burn_subtitles(video_path: Path, srt_path: Path, output_path: Path, alignment=2, margin=None):
+def burn_subtitles(video_path: Path, srt_path: Path, output_path: Path, alignment=2, margin=None):
     """
     Burn single-line captions into a video using FFmpeg with proper positioning.
     
@@ -154,7 +155,7 @@ def generate_captions(audio_path: str, model_size: str = "tiny"):
 
 
 # Main Captioning Pipeline
- def process_caption_video(youtube_url: str):
+def process_caption_video(youtube_url: str):
     """Full caption pipeline: download → transcribe → render → return paths."""
     tmpdir = Path(tempfile.mkdtemp())
 
