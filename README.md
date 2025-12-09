@@ -1,53 +1,110 @@
-# 🎬 Captions 
+# 🧢 CaptionGen
 
-**Auto-sync captions for YouTube Shorts — built to eliminate manual editing.**
-
-This system uses **OpenAI Whisper + FFmpeg** to automatically generate, split, clean, and burn cinematic captions directly onto videos.  
-Built to attack the exact bottleneck Varun Mayya described — *manual caption syncing* in short-form video production.
+**AI-powered, auto-synced captions for YouTube Shorts.**
+Removes the manual captioning pain — built on **FastAPI + Whisper + FFmpeg** for real-time caption generation.
 
 ---
 
 ## ⚙️ Features
-✅ Transcribes any YouTube Short directly (no manual upload)  
-✅ 2–3 word micro-captions for natural rhythm  
-✅ Automatic punctuation cleanup & overlap removal  
-✅ Fade-in/fade-out transitions, no background boxes  
-✅ Dynamic word highlights (e.g., “AI”, “build”, “video”)  
 
+* ⚡ **Direct YouTube Shorts support** – paste any link, get captioned video
+* 🧠 **OpenAI Whisper** – accurate transcription with natural pacing
+* 🪶 **Micro-captions (2–3 words)** – timed for natural rhythm
+* 🧹 **Auto cleanup** – punctuation normalization and overlap fixes
+* 🎨 **Styled burn-in captions** – crisp white text with dynamic highlights
+* 🧭 **Face-aware positioning** – captions adapt to visual composition
 
-## 🚀 Usage
+---
+
+## 🚀 Local Development
+
+### 1. Clone the repo
+
 ```bash
-python3 auto_caption_online.py "https://www.youtube.com/shorts/vAv70iVDDTM"
-````
+git clone https://github.com/<your-username>/CaptionGen.git
+cd CaptionGen
+```
 
-Output:
+### 2. Create and activate a virtual environment
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate  # (Windows: .venv\Scripts\activate)
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run the FastAPI server
+
+```bash
+cd api
+uvicorn index:app --host 0.0.0.0 --port 8000 --reload
+```
+
+Then open your browser at:
 
 ```
-✅ captioned.mp4 — clean, synced, ready-to-post short
+http://127.0.0.1:8000
 ```
 
 ---
 
-## 🧩 Example (before vs after)
+## 🧩 Example Workflow
 
-| Original                  | SmartSync Output                               |
-| ------------------------- | ---------------------------------------------- |
-| Manual captions, unsynced | Auto-timed, fade-in/out, white/yellow captions |
-
-*(Attach sample frame or short Loom GIF here)*
+| Step | Action                           | Output                                 |
+| ---- | -------------------------------- | -------------------------------------- |
+| 1    | Paste a YouTube Shorts URL       | Video fetched automatically            |
+| 2    | Whisper transcribes + timestamps | Clean `.srt` generated                 |
+| 3    | FFmpeg burns captions            | `outputs/videos/<title>_captioned.mp4` |
+| 4    | View & download in browser       | Cinematic captions, ready to post      |
 
 ---
 
 ## 🧱 Stack
 
-* **Python 3.12**
-* **Whisper (OpenAI)**
-* **FFmpeg**
-* **yt-dlp**
-* **pysrt**
+* **FastAPI** — backend + static serving
+* **Whisper (OpenAI)** — transcription engine
+* **FFmpeg** — caption rendering
+* **yt-dlp** — YouTube fetcher
+* **pysrt** — SRT generation and formatting
 
 ---
 
-## 🧭 Vision (v2 Plan)
+## 🧭 Next Version
 
-Integrate lightweight **vision models (CLIP / VideoLLaMA)** to understand motion & speaker focus → adapt caption placement and color dynamically.
+* Vision-based caption placement (CLIP / VideoLLaMA)
+* Real-time upload preview
+* Custom caption templates per brand
+
+---
+
+## ☁️ Railway Deployment
+
+```bash
+railway up
+```
+
+or manually:
+
+```bash
+railway run uvicorn api.index:app --host 0.0.0.0 --port $PORT
+```
+
+Ensure your `railway.toml` includes:
+
+```toml
+[deploy]
+startCommand = "uvicorn api.index:app --host 0.0.0.0 --port $PORT"
+```
+
+---
+
+## ⚖️ License
+
+This project is licensed under the **[MIT License](./LICENSE)**.
+You are free to use, modify, and distribute it with attribution.
+
