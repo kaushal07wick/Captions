@@ -5,23 +5,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 import tempfile
 import os
-
-USE_WHISPER = os.getenv("USE_WHISPER", "true").lower() == "true"
-
-if USE_WHISPER:
-        from caption_whisper import (
-        process_caption_video,
-        generate_captions,
-        save_srt,
-        burn_subtitles,
-    )
-else:
-    from caption_openai import (
-        process_caption_video,
-        generate_captions,
-        save_srt,
-        burn_subtitles,
-    )
+from caption_whisper import process_caption_video,generate_captions,save_srt,burn_subtitles
+from validate_captions import validate_caption_quality
+from caption_position import detect_face_position
 
 # PATH SETUP
 BASE_DIR = Path(__file__).resolve().parent.parent
