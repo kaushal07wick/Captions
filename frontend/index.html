@@ -5,541 +5,248 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CaptionGen</title>
   <style>
-  /* === GLOBAL === */
-  body {
-    background: linear-gradient(135deg, #eef1f8, #f5f6fa);
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-    margin: 0;
-    padding: 1.5rem;
-    color: #1e1e1e;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-  }
-
-  .container {
-    max-width: 1100px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* === HEADER === */
-  .header {
-    text-align: center;
-    margin-bottom: 2.2rem;
-  }
-
-  h1 {
-    font-size: 6rem;
-    color: #090dd3;
-    margin-bottom: 0.3rem;
-    letter-spacing: -0.02em;
-  }
-
-  .subtext {
-    color: #000000;
-    font-size: 1rem;
-  }
-
-  /* === INPUT BAR === */
-  .chat-input-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #ffffff;
-    border: 1px solid #dcdfea;
-    border-radius: 9999px;
-    padding: 0.5rem 0.8rem;
-    gap: 0.6rem;
-    max-width: 700px;
-    width: 100%;
-    margin: 0 auto 2rem;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
-    transition: all 0.25s ease;
-  }
-
-  .chat-input-bar:focus-within {
-    border-color: #090dd3;
-    box-shadow: 0 0 10px rgba(9, 13, 211, 0.25);
-  }
-
-  /* === INPUT FIELD === */
-  .chat-input-bar input[type="text"] {
-    flex: 1;
-    background: #f7f8fc;
-    border: 1px solid #e3e3e3;
-    border-radius: 9999px;
-    outline: none;
-    color: #222;
-    padding: 0.55rem 1rem;
-    font-size: 0.95rem;
-    transition: all 0.2s ease;
-  }
-
-  .chat-input-bar input[type="text"]:focus {
-    background: #fff;
-    border-color: #090dd3;
-  }
-
-  .chat-input-bar input::placeholder {
-    color: #aaa;
-  }
-
-  /* === ICON BUTTONS === */
-  .icon-btn {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    font-weight: 600;
-  }
-
-  .icon-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  .left-btn {
-    background: #f2f3f6;
-    color: #333;
-  }
-
-  .left-btn:hover:not(:disabled) {
-    background: #e2e3e6;
-  }
-
-  .right-btn {
-    background: #090dd3;
-    color: #fff;
-    font-size: 1rem;
-    box-shadow: 0 2px 8px rgba(9, 13, 211, 0.25);
-  }
-
-  .right-btn:hover:not(:disabled) {
-    background: #060aa8;
-    transform: translateY(-1px);
-  }
-
-  /* === LOADER === */
-  .loader {
-    text-align: center;
-    margin: 2rem 0;
-    color: #333;
-    font-weight: 500;
-  }
-
-  .spinner {
-    width: 50px;
-    height: 50px;
-    margin: 0 auto 1rem;
-    border: 4px solid #e0e0e0;
-    border-top: 4px solid #090dd3;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-
-  /* === VIDEO SECTION === */
-  .video-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 2rem;
-    margin-top: 1.5rem;
-    width: 100%;
-    flex-wrap: nowrap;
-  }
-
-  .video-card {
-    flex: 1 1 48%;
-    max-width: 48%;
-    background: #fff;
-    border: 1px solid #e3e3e3;
-    border-radius: 12px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: all 0.25s ease;
-  }
-
-  .video-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.08);
-  }
-
-  .video-header {
-    font-weight: 600;
-    margin-bottom: 0.6rem;
-    color: #111;
-    text-align: center;
-    font-size: 1.1rem;
-  }
-
-  .video-wrapper {
-    width: 100%;
-    aspect-ratio: 9 / 16;
-    background: #f1f2f4;
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  iframe, video {
-    width: 100%;
-    height: 100%;
-    border: none;
-    object-fit: cover;
-    display: block;
-  }
-
-  /* === OUTPUT INFO (Improved) === */
-  .output {
-    width: 100%;
-    max-width: 700px;
-    background: linear-gradient(145deg, #ffffff, #f6f7fc);
-    padding: 1.5rem 1.8rem;
-    border-radius: 14px;
-    border: 1px solid #d8dbeb;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    margin-top: 2.4rem;
-    font-size: 0.95rem;
-    color: #1c1c1c;
-    line-height: 1.6;
-  }
-
-  .output p {
-    margin: 0.4rem 0;
-  }
-
-  .output strong {
-    color: #090dd3;
-    font-weight: 600;
-  }
-
-  .output.success {
-    border-left: 5px solid #27ae60;
-    background: linear-gradient(145deg, #f9fffa, #e9f9ee);
-  }
-
-  .output.error {
-    border-left: 5px solid #d32f2f;
-    background: linear-gradient(145deg, #fff7f7, #fdeaea);
-    color: #d32f2f;
-    font-weight: 500;
-  }
-
-  /* === DOWNLOAD BUTTON === */
-  .download-btn {
-    display: inline-block;
-    margin-top: 1.6rem;
-    background: #090dd3;
-    color: #fff;
-    padding: 0.8rem 1.6rem;
-    border-radius: 8px;
-    font-weight: 600;
-    text-decoration: none;
-    letter-spacing: 0.02em;
-    transition: background 0.25s ease, transform 0.2s ease;
-  }
-
-  .download-btn:hover {
-    background: #060aa8;
-    transform: translateY(-2px);
-  }
-
-  .hidden {
-    display: none !important;
-  }
-
-  /* === MOBILE === */
-  @media (max-width: 768px) {
     body {
-      padding: 1rem;
+      background: linear-gradient(135deg, #eef1f8, #f5f6fa);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 1.5rem;
+      color: #1e1e1e;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
     }
-
-    h1 {
-      font-size: 3rem;
-    }
-
-    .chat-input-bar {
-      max-width: 95%;
-      padding: 0.4rem 0.6rem;
-      gap: 0.4rem;
-    }
-
-    .icon-btn {
-      width: 34px;
-      height: 34px;
-      font-size: 1rem;
-    }
-
-    .chat-input-bar input[type="text"] {
-      font-size: 0.85rem;
-      padding: 0.45rem 0.8rem;
-    }
-
-    .video-section {
+    .container {
+      max-width: 1100px;
+      width: 100%;
+      display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.8rem;
     }
-
+    h1 {
+      font-size: 6rem;
+      color: #090dd3;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.02em;
+    }
+    .subtext { color: #000; font-size: 1rem; }
+    .chat-input-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #fff; border: 1px solid #dcdfea;
+      border-radius: 9999px; padding: 0.5rem 0.8rem;
+      gap: 0.6rem; max-width: 700px; width: 100%;
+      margin: 0 auto 2rem; box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+      transition: all 0.25s ease;
+    }
+    .chat-input-bar:focus-within { border-color: #090dd3; box-shadow: 0 0 10px rgba(9,13,211,0.25); }
+    .chat-input-bar input[type="text"], .chat-input-bar input[type="password"] {
+      flex: 1; background: #f7f8fc; border: 1px solid #e3e3e3; border-radius: 9999px;
+      outline: none; color: #222; padding: 0.55rem 1rem; font-size: 0.95rem; transition: all 0.2s ease;
+    }
+    .icon-btn {
+      width: 42px; height: 42px; border-radius: 50%;
+      border: none; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.25s ease; font-weight: 600;
+    }
+    .icon-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .left-btn { background: #f2f3f6; color: #333; }
+    .left-btn:hover:not(:disabled) { background: #e2e3e6; }
+    .right-btn { background: #090dd3; color: #fff; font-size: 1rem; box-shadow: 0 2px 8px rgba(9,13,211,0.25); }
+    .right-btn:hover:not(:disabled) { background: #060aa8; transform: translateY(-1px); }
+    .loader { text-align: center; margin: 2rem 0; color: #333; font-weight: 500; }
+    .spinner {
+      width: 50px; height: 50px; margin: 0 auto 1rem;
+      border: 4px solid #e0e0e0; border-top: 4px solid #090dd3;
+      border-radius: 50%; animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .video-section {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 2rem; margin-top: 1.5rem; width: 100%; flex-wrap: nowrap;
+    }
     .video-card {
-      max-width: 100%;
+      flex: 1 1 48%; max-width: 48%; background: #fff;
+      border: 1px solid #e3e3e3; border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      padding: 1rem; display: flex; flex-direction: column; align-items: center;
+      transition: all 0.25s ease;
     }
-
+    iframe, video {
+      width: 100%; aspect-ratio: 9 / 16; border: none; object-fit: cover; display: block; border-radius: 10px;
+      background: #f1f2f4;
+    }
     .output {
-      max-width: 100%;
+      width: 100%; max-width: 700px; background: #fff;
+      padding: 1.5rem 1.8rem; border-radius: 14px;
+      border: 1px solid #d8dbeb; margin-top: 2.4rem;
+      font-size: 0.95rem; color: #1c1c1c; line-height: 1.6;
     }
-  }
-</style>
-
+    .output strong { color: #090dd3; font-weight: 600; }
+    .hidden { display: none !important; }
+    .download-btn {
+      display: inline-block; margin-top: 1.2rem; text-decoration: none;
+      background: #090dd3; color: #fff; padding: 0.7rem 1.2rem;
+      border-radius: 9999px; font-weight: 500; transition: all 0.25s ease;
+    }
+    .download-btn:hover { background: #060aa8; transform: translateY(-1px); }
+  </style>
 </head>
 <body>
   <div class="container">
-    <header class="header">
+    <header class="header" style="text-align:center;margin-bottom:2.2rem;">
       <h1>🧢CaptionGen</h1>
       <p class="subtext">Paste a YouTube Shorts URL or upload your own video</p>
     </header>
 
-    <!-- Unified Input Bar -->
+    <div class="chat-input-bar" style="margin-bottom:1rem;">
+      <input id="apiKeyInput" type="password" placeholder="Enter your OpenAI API key (sk-...)" />
+      <button id="saveApiKeyBtn" type="button" class="icon-btn right-btn">🔑</button>
+    </div>
+
     <div class="chat-input-bar">
       <button type="button" class="icon-btn left-btn" id="uploadTrigger">+</button>
       <input id="uploadFile" type="file" accept="video/*" hidden />
-      <input
-        id="inputField"
-        type="text"
-        placeholder="Paste a yt shorts URL or upload your own video..."
-      />
+      <input id="inputField" type="text" placeholder="Paste a YouTube Shorts URL or upload your video..." />
       <button id="processBtn" type="button" class="icon-btn right-btn">▶</button>
     </div>
 
-    <!-- Loader -->
     <div id="loader" class="loader hidden">
-      <div class="spinner"></div>
-      <p>Processing video…</p>
+      <div class="spinner"></div><p>Processing video…</p>
     </div>
 
-    <!-- Video Section -->
     <div id="video-section" class="video-section hidden">
       <div class="video-card">
         <div class="video-header">Original</div>
-        <div class="video-wrapper">
-          <iframe id="originalVideo" frameborder="0" allowfullscreen class="hidden"></iframe>
-          <video id="uploadedVideo" controls playsinline class="hidden"></video>
-        </div>
+        <iframe id="originalVideo" class="hidden" allowfullscreen></iframe>
+        <video id="uploadedVideo" controls playsinline preload="metadata" class="hidden"></video>
       </div>
       <div class="video-card">
         <div class="video-header">Captioned</div>
-        <div class="video-wrapper">
-          <video id="captionedVideo" controls playsinline class="hidden"></video>
-        </div>
+<video id="captionedVideo" controls playsinline preload="metadata" class="hidden" type="video/mp4"></video>
       </div>
     </div>
 
-    <!-- Output -->
     <div id="output" class="output hidden"></div>
-
-    <!-- Download Button -->
-    <a id="downloadBtn" class="hidden download-btn" download>⬇ Download Captioned Video</a>
+    <a id="downloadBtn" class="download-btn hidden" download>⬇ Download Captioned Video</a>
   </div>
 
   <script>
     const API_BASE = "http://127.0.0.1:8000";
-    
-    const inputField = document.getElementById("inputField");
+
+    // === API KEY HANDLING ===
+    const apiKeyInput = document.getElementById("apiKeyInput");
+    const saveApiKeyBtn = document.getElementById("saveApiKeyBtn");
+    if (localStorage.getItem("OPENAI_API_KEY")) {
+      apiKeyInput.placeholder = "✅ Key loaded (session)";
+      apiKeyInput.disabled = true;
+      saveApiKeyBtn.disabled = true;
+    }
+    saveApiKeyBtn.onclick = () => {
+      const key = apiKeyInput.value.trim();
+      if (!key.startsWith("sk-")) return alert("Invalid key format.");
+      localStorage.setItem("OPENAI_API_KEY", key);
+      apiKeyInput.value = "";
+      apiKeyInput.placeholder = "✅ Key saved (session)";
+      apiKeyInput.disabled = true;
+      saveApiKeyBtn.disabled = true;
+    };
+
     const uploadFile = document.getElementById("uploadFile");
+    const uploadBtn = document.getElementById("uploadTrigger");
+    const inputField = document.getElementById("inputField");
     const processBtn = document.getElementById("processBtn");
     const loader = document.getElementById("loader");
-    const videoSection = document.getElementById("video-section");
     const origVid = document.getElementById("originalVideo");
     const uploadedVid = document.getElementById("uploadedVideo");
     const capVid = document.getElementById("captionedVideo");
+    const videoSection = document.getElementById("video-section");
     const output = document.getElementById("output");
-    const uploadBtn = document.getElementById("uploadTrigger");
     const downloadBtn = document.getElementById("downloadBtn");
 
-    // Trigger file picker on "+" click
-    uploadBtn.addEventListener("click", () => uploadFile.click());
-
-    // Show filename feedback
-    uploadFile.addEventListener("change", () => {
-      if (uploadFile.files.length) {
+    uploadBtn.onclick = () => uploadFile.click();
+    uploadFile.onchange = () => {
+      if (uploadFile.files.length)
         inputField.placeholder = `Selected: ${uploadFile.files[0].name}`;
-        inputField.value = "";
-      } else {
-        inputField.placeholder = "Paste YouTube Shorts URL or upload your video...";
-      }
-    });
+    };
 
-    // Reset the UI
     function resetUI() {
       loader.classList.add("hidden");
       videoSection.classList.add("hidden");
       output.classList.add("hidden");
       downloadBtn.classList.add("hidden");
-      origVid.src = "";
+      origVid.src = uploadedVid.src = capVid.src = "";
       origVid.classList.add("hidden");
-      uploadedVid.src = "";
       uploadedVid.classList.add("hidden");
-      capVid.src = "";
       capVid.classList.add("hidden");
     }
 
-    // Handle both YouTube + Upload
-    processBtn.addEventListener("click", async (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-
+    processBtn.onclick = async () => {
+      const key = localStorage.getItem("OPENAI_API_KEY");
+      if (!key) return alert("Enter your API key first.");
       const url = inputField.value.trim();
       const file = uploadFile.files[0];
-
-      if (!url && !file) {
-        alert("Please paste a YouTube Shorts URL or upload a video file.");
-        return;
-      }
+      if (!url && !file) return alert("Paste a YouTube URL or upload a file.");
 
       resetUI();
       loader.classList.remove("hidden");
-      processBtn.disabled = true;
-      uploadBtn.disabled = true;
+      processBtn.disabled = true; uploadBtn.disabled = true;
 
       try {
-        let data;
-        let captionedVideoURL;
+        const headers = { "x-api-key": key };
+        let data, captionedVideoURL;
 
-        // Case 1: YouTube URL
-        if (url && (url.startsWith("http://") || url.startsWith("https://"))) {
-          const res = await fetch(`${API_BASE}/generate?youtube_url=${encodeURIComponent(url)}`);
-          
-          if (!res.ok) {
-            const errorData = await res.json().catch(() => ({}));
-            throw new Error(errorData.error || `Server error: ${res.status}`);
-          }
-
+        if (url.startsWith("http")) {
+          const res = await fetch(`${API_BASE}/generate?youtube_url=${encodeURIComponent(url)}`, { headers });
           data = await res.json();
-          
-          if (data.error) throw new Error(data.error);
+          if (!res.ok) throw new Error(data.error || "Server error");
 
-          // Embed original YouTube video
-          const videoIdMatch = url.match(/shorts\/([a-zA-Z0-9_-]+)/) || url.match(/v=([a-zA-Z0-9_-]+)/);
-          const videoId = videoIdMatch ? videoIdMatch[1] : null;
-          
-          if (videoId) {
-            origVid.src = `https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0`;
+          const match = url.match(/shorts\/([a-zA-Z0-9_-]+)/) || url.match(/v=([a-zA-Z0-9_-]+)/);
+          if (match) {
+            origVid.src = `https://www.youtube.com/embed/${match[1]}?modestbranding=1&rel=0`;
             origVid.classList.remove("hidden");
           }
-
-          // Get captioned video URL from response
-          captionedVideoURL = data.captioned_video.startsWith('/') 
-            ? `${API_BASE}${data.captioned_video}`
-            : `${API_BASE}/${data.captioned_video}`;
-        }
-        // Case 2: File Upload - Backend returns binary video file
-        else if (file) {
+          captionedVideoURL = `${API_BASE}${data.captioned_video}`;
+        } else if (file) {
           const formData = new FormData();
           formData.append("file", file);
-
-          const res = await fetch(`${API_BASE}/upload`, {
-            method: "POST",
-            body: formData,
-          });
-
-          if (!res.ok) {
-            const errorText = await res.text();
-            throw new Error(errorText || `Upload error: ${res.status}`);
-          }
-
-          // Check if response is video or JSON
-          const contentType = res.headers.get("content-type");
-          
-          if (contentType && contentType.includes("video")) {
-            // Backend returned video file directly
-            const blob = await res.blob();
-            captionedVideoURL = URL.createObjectURL(blob);
-            
-            // Create mock data since we got binary response
-            data = {
-              title: file.name.replace(/\.[^/.]+$/, ""),
-              alignment: "Center",
-              source: "Upload"
-            };
-          } else {
-            // Backend returned JSON (unexpected based on your code, but handle it)
-            data = await res.json();
-            if (data.error) throw new Error(data.error);
-            
-            captionedVideoURL = data.captioned_video.startsWith('/') 
-              ? `${API_BASE}${data.captioned_video}`
-              : `${API_BASE}/${data.captioned_video}`;
-          }
-
-          // Show original uploaded file
+          const res = await fetch(`${API_BASE}/upload`, { method: "POST", headers, body: formData });
+          if (!res.ok) throw new Error("Upload failed.");
+          const blob = await res.blob();
+          captionedVideoURL = URL.createObjectURL(blob);
           uploadedVid.src = URL.createObjectURL(file);
           uploadedVid.classList.remove("hidden");
+          data = { title: file.name, source: "Upload", alignment: "Center" };
         }
 
-        // Show Captioned Video
-        if (!captionedVideoURL) {
-          throw new Error("Captioned video not found in response.");
-        }
-        
         capVid.src = captionedVideoURL;
-        capVid.classList.remove("hidden");
+        capVid.type = "video/mp4";
         capVid.load();
-
-        // Show video section
+        capVid.classList.remove("hidden");
         videoSection.classList.remove("hidden");
 
-        // Show Info
         output.innerHTML = `
           <p><strong>Title:</strong> ${data.title || "Untitled"}</p>
           <p><strong>Alignment:</strong> ${data.alignment || "Center"}</p>
-          <p><strong>Source:</strong> ${data.source || (file ? "Upload" : "YouTube")}</p>
-          ${data.quality_score ? `<p><strong>Quality Score:</strong> ${data.quality_score}</p>` : ''}
+          <p><strong>Source:</strong> ${data.source}</p>
+          ${data.quality_score ? `<p><strong>Quality Score:</strong> ${data.quality_score}</p>` : ""}
         `;
         output.classList.remove("hidden");
-
-        // Setup Download
         downloadBtn.href = captionedVideoURL;
-        downloadBtn.download = `${(data.title || "captioned").replace(/[^a-z0-9]/gi, '_')}_captioned.mp4`;
+        downloadBtn.download = `${(data.title || "captioned").replace(/[^a-z0-9]/gi, "_")}_captioned.mp4`;
         downloadBtn.classList.remove("hidden");
 
-        // Clear inputs
-        inputField.value = "";
-        uploadFile.value = "";
-        inputField.placeholder = "Paste YouTube Shorts URL or upload your video...";
-
-      } catch (err) {
-        console.error("Processing failed:", err);
-        output.innerHTML = `<p style="color: #d32f2f; font-weight: 500;">❌ Error: ${err.message}</p>`;
+      } catch (e) {
+        console.error(e);
+        output.innerHTML = `<p style="color:#d32f2f;">❌ ${e.message}</p>`;
         output.classList.remove("hidden");
       } finally {
         loader.classList.add("hidden");
         processBtn.disabled = false;
         uploadBtn.disabled = false;
       }
-    });
+    };
 
-    // Allow Enter key to submit
-    inputField.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        processBtn.click();
-      }
-    });
+    inputField.addEventListener("keypress", e => e.key === "Enter" && processBtn.click());
   </script>
 </body>
 </html>

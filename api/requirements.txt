@@ -1,8 +1,24 @@
+# --- Core ---
 fastapi
 uvicorn[standard]
 python-multipart
-pysrt
-yt-dlp
+
+# --- Audio/Video ---
 ffmpeg-python
 pydub
-openai
+pysrt
+yt-dlp
+
+# --- Whisper + Torch (CPU-only, Python 3.12 compatible) ---
+torch==2.2.2+cpu
+torchvision==0.17.2+cpu
+torchaudio==2.2.2+cpu
+-f https://download.pytorch.org/whl/torch_stable.html
+
+openai-whisper==20231117
+
+# --- Misc ---
+requests
+
+# --- Compatibility fix ---
+numpy==1.26.4
